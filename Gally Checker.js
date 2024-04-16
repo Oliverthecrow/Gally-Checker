@@ -5,6 +5,11 @@ function setup() {
     let input = select('.search'); // Select the input field
     input.input(updateUsername); // Listen for input changes
 }
+let clientId = '46542';
+let redirectUri = encodeURIComponent('https://oliverthecrow.github.io/Gally-Checker/');
+let state = Math.random().toString(36).substring(2, 15);
+
+let authUrl = `https://www.bungie.net/en/OAuth/Authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&state=${state}`;
 
 function updateUsername() {
     let input = select('.search'); // Select the input field
@@ -21,47 +26,47 @@ function updateUsername() {
         return;
     }
 
-    const apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
+    let apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
 
 
     // Function to fetch data from Bungie API
     async function fetchGjallarhornInfo(username, discriminator) {
-        const membershipResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${username}/`, {
+        let membershipResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${username}/`, {
             headers: {
                 'X-API-Key': apiKey
             }
         });
-        const membershipData = await membershipResponse.json();
+        let membershipData = await membershipResponse.json();
         console.log('Membership response:', membershipData);
 
         try {
             // Get membership ID for the given username
-            const membershipResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${username}/`, {
+            let membershipResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${username}/`, {
                 headers: {
                     'X-API-Key': apiKey
                 }
             });
-            const { Response } = await membershipResponse.json();
+            let { Response } = await membershipResponse.json();
 
             // Find the correct user by matching the discriminator
-            const user = Response.find(player => player.displayName === `${username}#${discriminator}`);
+            let user = Response.find(player => player.displayName === `${username}#${discriminator}`);
             if (!user) {
                 console.error('User not found');
                 return false;
             }
 
-            const membershipId = user.membershipId;
+            let membershipId = user.membershipId;
 
             // Get profile information including collections
-            const profileResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/-1/Profile/${membershipId}/?components=102`, {
+            let profileResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/-1/Profile/${membershipId}/?components=102`, {
                 headers: {
                     'X-API-Key': apiKey
                 }
             });
-            const { Response: { profile: { data: { profileCollectibles } } } } = await profileResponse.json();
+            let { Response: { profile: { data: { profileCollectibles } } } } = await profileResponse.json();
 
             // Check if the Gjallarhorn rocket launcher is in the collections
-            const gjallarhorn = profileCollectibles.collectibles.find(collectible => collectible.itemHash === 1274330687);
+            let gjallarhorn = profileCollectibles.collectibles.find(collectible => collectible.itemHash === 1274330687);
 
             return gjallarhorn !== undefined;
         } catch (error) {
