@@ -31,42 +31,44 @@ function updateUsername() {
     let apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
 
     // Function to fetch data from Bungie API
-    async function fetchGjallarhornInfo(username, discriminator) {
-        try {
-            // Get membership ID for the given username
-            let membershipResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${username}/`, {
-                headers: {
-                    'X-API-Key': apiKey
-                }
-            });
-            let { Response } = await membershipResponse.json();
-
-            // Find the correct user by matching the discriminator
-            let user = Response.find(player => player.displayName === `${username}#${discriminator}`);
-            if (!user) {
-                console.error('User not found');
-                return false;
+async function fetchGjallarhornInfo(username, discriminator) {
+    try {
+        // Get membership ID for the given username
+        let membershipResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${username}/`, {
+            headers: {
+                'X-API-Key': apiKey
             }
+        });
+        let data = await membershipResponse.json();
+        console.log('SearchDestinyPlayer response:', data); // Log the response data
+        let players = data.Response || [];
 
-            let membershipId = user.membershipId;
-
-            // Get profile information including collections
-            let profileResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/-1/Profile/${membershipId}/?components=102`, {
-                headers: {
-                    'X-API-Key': apiKey
-                }
-            });
-            let { Response: { profile: { data: { profileCollectibles } } } } = await profileResponse.json();
-
-            // Check if the Gjallarhorn rocket launcher is in the collections
-            let gjallarhorn = profileCollectibles.collectibles.find(collectible => collectible.itemHash === 1274330687);
-
-            return gjallarhorn !== undefined;
-        } catch (error) {
-            console.error(error);
+        // Find the correct user by matching the discriminator
+        let user = players.find(player => player.displayName === `${username}#${discriminator}`);
+        if (!user) {
+            console.error('User not found');
             return false;
         }
+
+        let membershipId = user.membershipId;
+
+        // Get profile information including collections
+        let profileResponse = await fetch(`https://www.bungie.net/Platform/Destiny2/-1/Profile/${membershipId}/?components=102`, {
+            headers: {
+                'X-API-Key': apiKey
+            }
+        });
+        let { Response: profile } = await profileResponse.json();
+
+        // Check if the Gjallarhorn rocket launcher is in the collections
+        let gjallarhorn = profile.profileCollectibles.collectibles.find(collectible => collectible.itemHash === 1274330687);
+
+        return gjallarhorn !== undefined;
+    } catch (error) {
+        console.error(error);
+        return false;
     }
+}
 
     window.addEventListener('keydown', function (e) {
         if (e.keyCode == 13) {
