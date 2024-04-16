@@ -58,7 +58,7 @@ function updateUsername() {
             let { Response: profile } = await profileResponse.json();
 
             // Check if the Gjallarhorn rocket launcher is in the collections
-            let gjallarhorn = profile.profileCollectibles.collectibles.find(collectible => collectible.itemHash === 1274330687);
+            let gjallarhorn = profile.profileCollectibles.collectibles.find(collectible => collectible.itemHash === 1363886209);
 
             return gjallarhorn !== undefined;
         } catch (error) {
