@@ -26,7 +26,7 @@ function checkGjallarhorn() {
             .then(response => response.json())
             .then(data => {
                 const collections = data.Response.profileCollectibles.data.collectibles;
-                const hasGjallarhorn = collections.hasOwnProperty("1274330687");
+                const hasGjallarhorn = collections.hasOwnProperty("1363886209");
 
                 if (hasGjallarhorn) {
                     document.getElementById("result").innerText = "The user has Gjallarhorn in their collections!";
