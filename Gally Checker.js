@@ -13,7 +13,7 @@ function checkGjallarhorn() {
     fetch(url, {
         headers: {
             'X-API-Key': apiKey,
-            'Origin': 'https://oliverthecrow.github.io'
+            'Origin': 'https://oliverthecrow.github.io/Gally-Checker/'
         },
     })
     .then(response => response.json())
