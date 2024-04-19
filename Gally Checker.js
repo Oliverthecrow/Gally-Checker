@@ -3,7 +3,6 @@ function checkGjallarhorn() {
     let displayName = document.getElementById('userNameInput').value.trim();
     let membershipType = 3; // Assuming Steam, change if needed
 
-    // Remove the hash symbol and get the last 4 characters of the username
     const hashIndex = displayName.indexOf('#');
     if (hashIndex !== -1) {
         displayName = displayName.substring(0, hashIndex);
