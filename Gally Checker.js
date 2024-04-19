@@ -1,17 +1,15 @@
 function checkGjallarhorn() {
-    const apiKey = 'YOUR_API_KEY';
+    const apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
     let displayName = document.getElementById('userNameInput').value.trim();
     let membershipType = 3; // Assuming Steam, change if needed
 
-    // Extract the numbers after the username
+    // Remove the hash symbol and get the last 4 characters of the username
     const hashIndex = displayName.indexOf('#');
-    let discriminator = '';
     if (hashIndex !== -1) {
-        discriminator = displayName.substring(hashIndex + 1).replace('/', ''); // Remove any slashes
         displayName = displayName.substring(0, hashIndex);
     }
 
-    const url = `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${displayName}${discriminator ? '/' + discriminator : ''}/`;
+    const url = `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${displayName}/`;
 
     fetch(url, {
         headers: {
@@ -34,12 +32,7 @@ function checkGjallarhorn() {
                     'X-API-Key': apiKey,
                 },
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch collection: ${response.status} ${response.statusText}`);
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(collectionData => {
                 // Check if Gjallarhorn is in the collection
                 const collections = collectionData.Response.profileCollectibles.data.collectibles;
