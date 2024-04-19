@@ -13,7 +13,7 @@ function checkGjallarhorn() {
     fetch(url, {
         headers: {
             'X-API-Key': apiKey,
-            'Origin': 'https://oliverthecrow.github.io/Gally-Checker/'
+            'Origin': 'https://oliverthecrow.github.io'
         },
     })
     .then(response => response.json())
@@ -30,7 +30,7 @@ function checkGjallarhorn() {
             fetch(collectionUrl, {
                 headers: {
                     'X-API-Key': apiKey,
-                    'Origin': 'https://oliverthecrow.github.io/Gally-Checker/'
+                    'Origin': 'https://oliverthecrow.github.io'
                 },
             })
             .then(response => response.json())
