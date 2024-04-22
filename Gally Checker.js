@@ -1,5 +1,5 @@
 const apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
-const playerName = 'Oliver the crow'; // Replace 'PLAYER_NAME' with the name of the player you want to search
+const playerName = 'Oliver the crow#3439'; // Replace 'PLAYER_NAME' with the name of the player you want to search
 
 // Function to make a request to the Bungie API
 async function makeRequest(url) {
