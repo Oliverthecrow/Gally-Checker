@@ -1,75 +1,73 @@
-const apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
-const playerName = 'Oliver the crow#3439'; // Replace 'PLAYER_NAME' with the name of the player you want to search
+const axios = require('axios');
 
-// Function to make a request to the Bungie API
-async function makeRequest(url) {
+// Function to get Destiny 2 profile information
+async function getDestinyProfile(memberId, membershipType) {
+    const apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
+    const url = `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${memberId}/?components=100,200`;
+
     try {
-        const response = await fetch(url, {
+        const response = await axios.get(url, {
             headers: {
                 'X-API-Key': apiKey
             }
         });
-        const data = await response.json();
-        if (!response.ok) {
-            throw new Error(data.Message || 'Failed to fetch data from Bungie API');
-        }
-        return data;
+
+        return response.data;
     } catch (error) {
-        console.error('Error:', error.message);
-        throw error;
+        console.error('Error fetching Destiny 2 profile:', error);
+        return null;
     }
 }
 
-// Function to search for a player by name
-async function searchPlayer(playerName) {
-    const searchUrl = `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${encodeURIComponent(playerName)}/`;
+// Function to check if Gjallarhorn is in the collections
+function hasGjallarhorn(collections) {
+    const gjallarhornHash = 1363886209; // Gjallarhorn's item hash
+    return collections.some(item => item.itemHash === gjallarhornHash);
+}
+
+// Main function to check Gjallarhorn in collections
+async function checkForGjallarhorn(username, discriminator) {
+    const apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
+    const membershipType = 3; // Platform code for PC, change if needed
+    let memberId;
+
+    // Get the membership ID using the displayName and discriminator
     try {
-        const searchResult = await makeRequest(searchUrl);
-        if (searchResult.Response.length > 0) {
-            return searchResult.Response[0].membershipId;
+        const response = await axios.get(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${username}%23${discriminator}/`, {
+            headers: {
+                'X-API-Key': apiKey
+            }
+        });
+
+        if (response.data.Response.length > 0) {
+            memberId = response.data.Response[0].membershipId;
         } else {
-            console.log('Player not found');
-            return null;
+            console.error('Player not found');
+            return;
         }
     } catch (error) {
-        console.error('Error searching player:', error.message);
-        throw error;
+        console.error('Error fetching membership ID:', error);
+        return;
     }
-}
 
-// Function to check if the player has Gjallarhorn in their collections
-async function checkGjallarhorn(playerId) {
-    const collectionsUrl = `https://www.bungie.net/Platform/Destiny2/${playerId}/Profile/`;
-    try {
-        const profileData = await makeRequest(collectionsUrl);
-        const characterIds = profileData.Response.profile.data.characterIds;
-        const characterId = characterIds[0]; // Assuming we are checking the collections of the first character
-        const characterEquipmentUrl = `https://www.bungie.net/Platform/Destiny2/${playerId}/Profile/${characterId}/?components=102,205`;
-        const equipmentData = await makeRequest(characterEquipmentUrl);
-        const equipment = equipmentData.Response.equipment.data.items;
-        const gjallarhorn = equipment.find(item => item.itemHash === 1363886209); // Gjallarhorn's itemHash
-        if (gjallarhorn) {
-            console.log('Gjallarhorn found in collections!');
+    // Get Destiny profile information
+    const profile = await getDestinyProfile(memberId, membershipType);
+
+    if (profile && profile.Response && profile.Response.profileInventory && profile.Response.profileInventory.data) {
+        const collections = Object.values(profile.Response.profileInventory.data.items);
+
+        // Check if Gjallarhorn is in collections
+        const hasGjallarhornInCollections = hasGjallarhorn(collections);
+        
+        if (hasGjallarhornInCollections) {
+            console.log(`${username}#${discriminator} has Gjallarhorn in their collections!`);
         } else {
-            console.log('Gjallarhorn not found in collections');
+            console.log(`${username}#${discriminator} does not have Gjallarhorn in their collections.`);
         }
-    } catch (error) {
-        console.error('Error checking Gjallarhorn:', error.message);
-        throw error;
+    } else {
+        console.error('Error fetching profile information');
     }
 }
 
-// Main function to initiate the search
-async function main() {
-    try {
-        const playerId = await searchPlayer(playerName);
-        if (playerId) {
-            await checkGjallarhorn(playerId);
-        }
-    } catch (error) {
-        console.error('Main error:', error.message);
-    }
-}
-
-// Call the main function
-main();
+// Example usage
+checkForGjallarhorn('Oliver the crow', '3439');
