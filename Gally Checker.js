@@ -1,25 +1,23 @@
-// Function to make HTTP GET request
-async function axiosGet(url, headers) {
-    try {
-        const response = await fetch(url, {
-            headers: headers
-        });
-        return await response.json();
-    } catch (error) {
+
+function axiosGet(url, headers) {
+    return fetch(url, {
+        headers: headers
+    }).then(response => response.json())
+    .catch(error => {
         console.error('Error fetching data:', error);
         return null;
-    }
+    });
 }
 
 // Function to get Destiny 2 profile information
-async function getDestinyProfile(memberId, membershipType) {
+function getDestinyProfile(memberId, membershipType) {
     const apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
     const url = `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${memberId}/?components=100,200`;
     const headers = {
         'X-API-Key': apiKey
     };
 
-    return await axiosGet(url, headers);
+    return axiosGet(url, headers);
 }
 
 // Function to check if Gjallarhorn is in the collections
