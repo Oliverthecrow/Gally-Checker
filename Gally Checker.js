@@ -1,5 +1,9 @@
+function axiosGet(url, apiKey, clientId) {
+    const headers = {
+        'X-API-Key': apiKey,
+        'X-ClientId': clientId
+    };
 
-function axiosGet(url, headers) {
     return fetch(url, {
         headers: headers
     }).then(response => response.json())
@@ -10,14 +14,10 @@ function axiosGet(url, headers) {
 }
 
 // Function to get Destiny 2 profile information
-function getDestinyProfile(memberId, membershipType) {
-    const apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
+function getDestinyProfile(memberId, membershipType, apiKey, clientId) {
     const url = `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${memberId}/?components=100,200`;
-    const headers = {
-        'X-API-Key': apiKey
-    };
 
-    return axiosGet(url, headers);
+    return axiosGet(url, apiKey, clientId);
 }
 
 // Function to check if Gjallarhorn is in the collections
@@ -27,22 +27,19 @@ function hasGjallarhorn(collections) {
 }
 
 // Main function to check Gjallarhorn in collections
-async function checkForGjallarhorn(username, discriminator) {
-    const apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
+async function checkForGjallarhorn(username, discriminator, apiKey, clientId) {
     const membershipType = -1; // Platform code for PC, change if needed
 
     // Get the membership ID using the displayName and discriminator
     const searchUrl = `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${username}%23${discriminator}/`;
-    const searchHeaders = {
-        'X-API-Key': apiKey
-    };
-    const searchResponse = await axiosGet(searchUrl, searchHeaders);
+
+    const searchResponse = await axiosGet(searchUrl, apiKey, clientId);
 
     if (searchResponse && searchResponse.Response && searchResponse.Response.length > 0) {
         const memberId = searchResponse.Response[0].membershipId;
 
         // Get Destiny profile information
-        const profile = await getDestinyProfile(memberId, membershipType);
+        const profile = await getDestinyProfile(memberId, membershipType, apiKey, clientId);
 
         if (profile && profile.Response && profile.Response.profileInventory && profile.Response.profileInventory.data) {
             const collections = Object.values(profile.Response.profileInventory.data.items);
@@ -64,4 +61,4 @@ async function checkForGjallarhorn(username, discriminator) {
 }
 
 // Example usage
-checkForGjallarhorn('Oliver the crow', '3439');
+checkForGjallarhorn('Oliver the crow', '3439', 'YOUR_BUNGIE_API_KEY', 'YOUR_BUNGIE_CLIENT_ID');
