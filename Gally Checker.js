@@ -1,6 +1,9 @@
+let APIkey = 'd95853023d6143c89b5dd62c4c0ebdf9'
+let ClientID = '46542'
+
 function axiosGet(url, apiKey, clientId) {
     const headers = {
-        'X-API-Key': apiKey,
+        'X-API-Key': APIkey,
         'X-ClientId': clientId
     };
 
@@ -28,7 +31,7 @@ function hasGjallarhorn(collections) {
 
 // Main function to check Gjallarhorn in collections
 async function checkForGjallarhorn(username, discriminator, apiKey, clientId) {
-    const membershipType = -1; // Platform code for PC, change if needed
+    const membershipType = -1;
 
     // Get the membership ID using the displayName and discriminator
     const searchUrl = `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${username}%23${discriminator}/`;
@@ -44,7 +47,7 @@ async function checkForGjallarhorn(username, discriminator, apiKey, clientId) {
         if (profile && profile.Response && profile.Response.profileInventory && profile.Response.profileInventory.data) {
             const collections = Object.values(profile.Response.profileInventory.data.items);
 
-            // Check if Gjallarhorn is in collections
+            // Check if Gjallarhorn is in collection
             const hasGjallarhornInCollections = hasGjallarhorn(collections);
 
             if (hasGjallarhornInCollections) {
