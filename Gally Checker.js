@@ -7,7 +7,6 @@ let SearchUrl = "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${
 let myHeaders = new Headers();
 myHeaders.append("X-API-KEY", apiKey);
 myHeaders.append("Authorization", "Bearer 46542");
-myHeaders.append("Cookie", "Q6dA7j3mn3WPBQVV61rt5CrQXv0q+I9ddZfGro+PognXQwjWM8PS+VE_=v1Et5Rgw__JlJ; __cflb=0H28vP5GxS7vgVH4MZT6rB7QcDNQ8jpmJwKwhc2McKD; bungleanon=sv=BAAAAACUeAAAAAAAABAwGgAAAAAAAAAAAAAAAABNqN5+2GPcCEAAAADJ85PcoWqGsq8GY1advw/GuKtJVJd9pV6Q1jPVOxFHH0zrrLrJ2dTZDx+N34ph+a3o7QXZu8rq7cMLLbUkG5OK&cl=MC4zMDg2OC4xNzE2MjQw; bungled=8137639881454811563; bungledid=B6JF3/+9vfZEqw+JpXye6yNNqN5+2GPcCAAA");
 
 let requestOptions = {
     method: "GET",
