@@ -26,12 +26,14 @@ fetch("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/Oliver%20
 fetch(CollectionsUrl, requestOptions)
     .then(response => response.json())
     .then(result => {
+        let itemComponent = result.Response.collectibles.data;
         let GallyId = '1363886209';
-        let itemComponent = data.Response.itemComponents.collectibles.data;
 
         // Check if the player has the Gjallarhorn
         if (itemComponent[GallyId]) {
             console.log('Player has Gjallarhorn');
+        } 
+        else {
+            console.log('Player does not have Gjallarhorn');
         }
-        else { console.log('Player does not have Gjallarhorn') }
     })
