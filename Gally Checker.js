@@ -7,6 +7,7 @@ let CollectionsUrl = `https://bungie.net/Platform/Destiny2/${membershipType}/Pro
 
 let myHeaders = new Headers();
 myHeaders.append("X-API-KEY", apiKey);
+myHeaders.append("Authorization", "Bearer 46542");
 
 let requestOptions = {
     method: "GET",
@@ -26,6 +27,7 @@ fetch("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/Oliver%20
 fetch(CollectionsUrl, requestOptions)
     .then(response => response.json())
     .then(result => {
+        console.log(result);
         let itemComponent = result.Response.collectibles.data;
         let GallyId = '1363886209';
 
