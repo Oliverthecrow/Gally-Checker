@@ -14,29 +14,29 @@ let requestOptions = {
     redirect: 'follow'
 };
 
-function getUserFromName(name) {
+async function getUserFromName(name) {
     let headers = new Headers();
-    headers.append("X-API-KEY", apiKey);
-    headers.append("Authorization", "46542");
-    console.log("Membership type ${membershipType}");
-    console.log("Membership Id ${membershipId}");
+    headers.append('X-API-KEY', apiKey);
+    headers.append('Authorization', '46542');
+    console.log('Membership type' + membershipType);
+    console.log('Membership Id' + membershipId);
     let opts = {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({
-            displayName: name.split("#")[0],
-            displayNameCode: name.split("#")[1],
+            displayName: name.split('#')[0],
+            displayNameCode: name.split('#')[1],
         }),
         headers: headers,
-        redirect: "follow",
+        redirect: 'follow',
     };
-    user = fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1`, opts).then((response) => response.json().then());
+    user = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1`, opts).then((response) => response.json().then());
     return user.Response;
 }
 
-function ExoticChecker(name) {
+async function ExoticChecker(name) {
     let user = getUserFromName(name);
     if (!user[0]) {
-        return `user "${name}" does not exist.`;
+        return `user '${name}' does not exist.`;
     }
     let firstMembership = user[0];
     membershipType = firstMembership.membershipType;
@@ -62,5 +62,4 @@ function ExoticChecker(name) {
 function StrandDetection() {
 
 }
-getUserFromName('Oliver the crow#3439').then(console.log);
-ExoticChecker();
+ExoticChecker('Oliver the crow#3439');
