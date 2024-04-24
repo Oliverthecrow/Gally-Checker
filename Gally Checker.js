@@ -3,6 +3,7 @@ let username = '';
 let membershipId = '';
 let membershipType = '';
 let SearchUrl = 'https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${username}/';
+let ExoticsOwned = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
 
 let myHeaders = new Headers();
 myHeaders.append('X-API-Key', apiKey);
@@ -28,16 +29,17 @@ function ExoticChecker(type, name) {
         .then((response) => response.json().then((result) => {
             // every item that the player owns
             let collectibles = result.Response.profileCollectibles.data.collectibles;
-            /* GallyId '4027219968' IziId = '3211806999' LuminaId = '3512014804' WithoardID = '2522817335' TractorId = '3580904581'
-            Verity's Brow = '2897117448' Cenotaph = '2374129871'
+            /* GallyId '4027219968' IziId = '24541428' LuminaId = '2924632392' WithoardID = '1250332035' TractorId = '2094776121'
+            Verity's Brow = '846189250' Cenotaph = '2940602493'
             */
-            let Exotics = ['4027219968', '3211806999', '3512014804', '2522817335', '3580904581', '2897117448', '2374129871'];
+            let Exotics = ['4027219968', '24541428', '2924632392', '1250332035', '2094776121', '846189250', '2940602493'];
 
             for (let i = 0; i < Exotics.length; i++) {
                 if (collectibles[Exotics[i]]) {
                     console.log('Player has ' + Exotics[i]);
+                    ExoticsOwned.splice(i, 1, true);
                 }
-                else { console.log('Player does not have' + Exotics[i]); }
+                else { console.log('Player does not have ' + Exotics[i]); }
             };
         }));
 }
