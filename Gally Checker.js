@@ -25,7 +25,7 @@ fetch("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/Oliver%20
 fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`, requestOptions)
     .then(response => response.json().then(result => {
         // every item that the character has
-        let itemComponent = result.Response.characterCollectibles.data;
+        let itemComponent = result.Response.playerCollectibles
         let GallyId = '4027219968';
 
         // Check if the player has the Gjallarhorn.
