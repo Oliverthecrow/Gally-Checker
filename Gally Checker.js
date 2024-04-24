@@ -5,7 +5,7 @@ let membershipId = '';
 let SearchUrl = "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${username}/";
 
 let myHeaders = new Headers();
-myHeaders.append("X-API-KEY", apiKey);
+myHeaders.append("X-API-KEY", 'd95853023d6143c89b5dd62c4c0ebdf9');
 myHeaders.append("Authorization", "Bearer 46542");
 
 let requestOptions = {
