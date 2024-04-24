@@ -55,7 +55,7 @@ async function ExoticChecker(name) {
 
             for (let i = 0; i < Exotics.length; i++) {
                 if (collectibles[Exotics[i]].state === 0) {
-                    console.log('${name} has ' + Exotics[i]);
+                    console.log(name + ' has ' + Exotics[i]);
                     OwnedExotics.splice(i, 1, true)
                 }
                 else { console.log(name + ' does not have ' + Exotics[i]); }
@@ -63,11 +63,13 @@ async function ExoticChecker(name) {
         })
     );
 }
+/*used for testing, and also examples of names
 ExoticChecker('Oliver the crow').then(console.log);
 ExoticChecker('Oliver the crow#3439').then(console.log);
 ExoticChecker('Unstable Light 0:01#9056').then(console.log);
 ExoticChecker('very real username').then(console.log);
 ExoticChecker('mixed wrestling#8577').then(console.log);
+*/
 
 function preload() {
     Images = [
