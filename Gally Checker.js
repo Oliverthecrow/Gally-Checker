@@ -92,5 +92,5 @@ function draw() {
 function setname() {
     let name = document.getElementById('usernameinput').value;
     console.log("Variable name is:", name);
-    return name;
+    ExoticChecker(name).then(console.log);
 }
