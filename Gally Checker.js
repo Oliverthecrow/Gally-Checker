@@ -71,14 +71,6 @@ async function ExoticChecker(name) {
         })
     );
 }
-/*used for testing, and also examples of names
-ExoticChecker('Oliver the crow').then(console.log);
-ExoticChecker('Oliver the crow#3439').then(console.log);
-ExoticChecker('Unstable Light 0:01#9056').then(console.log);
-ExoticChecker('very real username').then(console.log);
-ExoticChecker('mixed wrestling#8577').then(console.log);
-*/
-
 function preload() {
     Images = [
         Gjally = loadImage('Gjally.jpg'),
