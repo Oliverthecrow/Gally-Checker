@@ -60,7 +60,7 @@ async function ExoticChecker(name) {
             let Exotics = ['4027219968', '24541428', '2924632392', '1250332035', '2094776121', '846189250', '2940602493'];
 
             for (let i = 0; i < Exotics.length; i++) {
-                console.log(charCollectibles[Exotics[i]].state);
+                console.log(charCollectibles[Exotics[i]].state.tostring())
                 if (collectibles[Exotics[i]].state === 0 || charCollectibles[Exotics[i]].state % 2 === 0 && charCollectibles[Exotics[i]].state != 0) {
                     console.log(name + ' has ' + Exotics[i]);
                     OwnedExotics.splice(i, 1, true)
