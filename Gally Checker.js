@@ -86,6 +86,11 @@ function setup() {
 }
 function draw() {
     for (let i = 0; i < Image.length; i++) {
-        Image(Images[i], WIW * 0.15 + (WIW * 0.15 * i), WIH * 0.75)
+        image(Images[i], WIW * 0.15 + (WIW * 0.15 * i), WIH * 0.75)
     }
+}
+function setname() {
+    let name = document.getElementById('usernameinput').value;
+    console.log("Variable name is:", name);
+    return name;
 }
