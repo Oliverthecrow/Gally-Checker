@@ -24,7 +24,7 @@ function findPlayer(Url) {
         }))
 }
 function ExoticChecker(type, name) {
-    fetch(`https://www.bungie.net/Platform/Destiny2/${type}/Profile/${name}/?components=800`, requestOptions)
+    fetch('https://www.bungie.net/Platform/Destiny2/' + type + '/Profile/' + name + '/?components=800', requestOptions)
         .then((response) => response.json().then((result) => {
             // every item that the player owns
             let collectibles = result.Response.profileCollectibles.data.collectibles;
