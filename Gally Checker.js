@@ -92,12 +92,12 @@ function setup() {
 }
 function draw() {
     for (let i = 0; i < Images.length; i++) {
-        image(Images[i], WIW * 0.10 + WIW * 0.13 * i, WIH * 0.6);
+        image(Images[i], WIW * 0.10 + WIW * 0.13 * i, WIH * 0.4);
         if (OwnedExotics[i]) {
-            image(Checkmark,WIW * 0.10 + WIW * 0.13 * i, WIH * 0.6,96,96);
+            image(Checkmark,WIW * 0.10 + WIW * 0.13 * i, WIH * 0.4,96,96);
         }
         else {
-            image(X,WIW * 0.10 + WIW * 0.13 * i, WIH * 0.6,96,96);
+            image(X,WIW * 0.10 + WIW * 0.13 * i, WIH * 0.4,96,96);
         }
     }
 }
