@@ -1,7 +1,7 @@
 let apiKey = "d95853023d6143c89b5dd62c4c0ebdf9";
 let username = '';
-let membershipType = '';
-let membershipId = '';
+let membershipType = '1';
+let membershipId = '4611686018439914143';
 let SearchUrl = "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${username}/";
 
 let myHeaders = new Headers();
@@ -13,33 +13,18 @@ let requestOptions = {
     headers: myHeaders,
     redirect: "follow"
 };
-
 fetch("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/Oliver%20the%20crow%233439/", requestOptions)
-    .then(response => response.json())
-    .then(result => {
+    .then(response => response.json() .then(result => {
         let player = result.Response[0];
         membershipType = player.membershipType;
         membershipId = player.membershipId;
         console.log("Membership Type:", membershipType);
         console.log("MembershipID", membershipId);
-    })
-    fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`, requestOptions)
-    .then(response => response.json().then(result => {
-        let itemComponent = result.Response.charactercollectibles.data;
-        let GallyId = '1363886209';
-
-        // Check if the player has the Gjallarhorn.
-        if (itemComponent[GallyId]) {
-            console.log('Player has Gjallarhorn');
-        }
-        else {
-            console.log('Player does not have Gjallarhorn');
-        }
     }))
-    //just for testing rn
-    fetch('https://bungie.net/Platform/Destiny2/1/Profile/4611686018439914143/?components=800', requestOptions)
-    .then(response => response.json().then( result => {
-        console.log(result);
+
+fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`, requestOptions)
+    .then(response => response.json().then(result => {
+        // every item that the character has
         let itemComponent = result.Response.characterCollectibles.data;
         let GallyId = '1363886209';
 
