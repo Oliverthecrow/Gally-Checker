@@ -4,6 +4,7 @@ let Images = [];
 let WIW = window.innerWidth;
 let WIH = window.innerHeight;
 let broke = false
+let doesnotexist = false
 
 async function getUserFromName(name) {
     let headers = new Headers();
@@ -37,6 +38,7 @@ async function ExoticChecker(name) {
     };
     let user = await getUserFromName(name);
     if (!user[0]) {
+        doesnotexist = true;
         return `user '${name}' does not exist.`;
     }
     let firstMembership = user[0];
@@ -101,12 +103,13 @@ function draw() {
     textAlign(CENTER);
     textSize(18);
     if(broke) {text("THIS USER IS SO BROKE HOLY",WIW*0.8,WIH*0.8);}
-    if(!user[0]) {text("This user does not seem to exist",WIW*0.5,WIH*0.5);}
+    if(doesnotexist) {text("This user does not seem to exist",WIW*0.5,WIH*0.5);}
 }
 function setname() {
     let name = document.getElementById('userNameInput').value;
     console.log("Variable name is:", name);
     OwnedExotics = [false, false, false, false, false, false, false];
     broke = false;
+    doesnotexist = false;
     ExoticChecker(name).then(console.log);
 }
