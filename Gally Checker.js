@@ -100,7 +100,7 @@ function draw() {
     }
 }
 function setname() {
-    let name = document.getElementById('usernameinput').value;
+    let name = document.getElementById('userNameInput').value;
     console.log("Variable name is:", name);
     OwnedExotics = [false, false, false, false, false, false, false];
     ExoticChecker(name).then(console.log);
