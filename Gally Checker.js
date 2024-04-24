@@ -53,7 +53,7 @@ async function ExoticChecker(name) {
             Verity's Brow = '846189250' Cenotaph = '2940602493'
             */
             let collectibles = result.Response.profileCollectibles.data.collectibles;
-            let charCollectibles = result.response.characterCollectibles.data.collectibles;
+            let charCollectibles = result.Response.characterCollectibles.data.collectibles;
             let Exotics = ['4027219968', '24541428', '2924632392', '1250332035', '2094776121', '846189250', '2940602493'];
 
             for (let i = 0; i < Exotics.length; i++) {
