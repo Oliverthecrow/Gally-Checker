@@ -18,6 +18,8 @@ function getUserFromName(name) {
     let headers = new Headers();
     headers.append("X-API-KEY", apiKey);
     headers.append("Authorization", "46542");
+    console.log("Membership type ${membershipType}");
+    console.log("Membership Id ${membershipId}");
     let opts = {
         method: "POST",
         body: JSON.stringify({
@@ -60,5 +62,5 @@ function ExoticChecker(name) {
 function StrandDetection() {
 
 }
-findPlayer('Oliver the crow#3439').then(console.log);
+getUserFromName('Oliver the crow#3439').then(console.log);
 ExoticChecker();
