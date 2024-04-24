@@ -18,7 +18,7 @@ h1 {
     margin-right: auto;
     margin-top: 10%;
 }
-.userNameInput {
+input {
     backdrop-filter: blur(8px);
     background-color: transparent;
     text-align: center;
@@ -38,8 +38,8 @@ button {
     text-align: center;
     font-size: 30px;
     color: black;
-    width: 20%;
-    height: 50px;
+    width: 10%;
+    height: 75px;
     border-style: solid;
     border-width: 2px;
     border-color: white;

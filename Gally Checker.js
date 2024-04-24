@@ -22,8 +22,6 @@ async function getUserFromName(name) {
         `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1`,
         opts
     ).then((response) => response.json().then());
-    console.log("membershipID " + membershipId);
-    console.log("membershipType " + membershipType);
     return user.Response;
 }
 
@@ -43,6 +41,8 @@ async function ExoticChecker(name) {
     let firstMembership = user[0];
     let membershipType = firstMembership.membershipType;
     let membershipId = firstMembership.membershipId;
+    console.log("membershipID " + membershipId);
+    console.log("membershipType " + membershipType);
     return fetch(
         `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`,
         requestOptions
