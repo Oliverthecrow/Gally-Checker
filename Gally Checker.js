@@ -1,6 +1,8 @@
 let apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
 let OwnedExotics = [false, false, false, false, false, false, false]
 let Images = [];
+let WIW = window.innerWidth;
+let WIH = window.innerHeight;
 
 async function getUserFromName(name) {
     let headers = new Headers();
@@ -77,20 +79,27 @@ function preload() {
         Verity = loadImage("Veritys Brow.jpg"),
         Cenotaph = loadImage('Cenotaph.jpg')
     ];
+    Checkmark = loadImage('checkmark.png');
+    X = loadImage('x.png');
 }
 function setup() {
-    let WIW = window.innerWidth;
-    let WIH = window.innerHeight;
     let canvas = createCanvas(WIW, WIH)
     canvas.parent('GallyCheckerCanvas')
 }
 function draw() {
-    for (let i = 0; i < Image.length; i++) {
-        image(Images[i], WIW * 0.15 + (WIW * 0.15 * i), WIH * 0.75)
+    for (let i = 0; i < Images.length; i++) {
+        image(Images[i], WIW * 0.10 + WIW * 0.13 * i, WIH * 0.6);
+        if (OwnedExotics[i]) {
+            image(Checkmark,WIW * 0.10 + WIW * 0.13 * i, WIH * 0.6,96,96);
+        }
+        else {
+            image(X,WIW * 0.10 + WIW * 0.13 * i, WIH * 0.6,96,96);
+        }
     }
 }
 function setname() {
     let name = document.getElementById('usernameinput').value;
     console.log("Variable name is:", name);
+    OwnedExotics = [false, false, false, false, false, false, false];
     ExoticChecker(name).then(console.log);
 }
