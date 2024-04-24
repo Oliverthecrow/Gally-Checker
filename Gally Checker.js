@@ -46,6 +46,7 @@ async function ExoticChecker(name) {
             /* GallyId '4027219968' IziId = '3211806999' LuminaId = '3512014804' WithoardID = '2522817335' TractorId = '3580904581'
             Verity's Brow = '2897117448' Cenotaph = '2374129871'
             */
+            let collectibles = result.Response.profileCollectibles.data.collectibles;
             let Exotics = ['4027219968', '3211806999', '3512014804', '2522817335', '3580904581', '2897117448', '2374129871'];
 
             for (let i = 0; i < Exotics.length; i++) {
