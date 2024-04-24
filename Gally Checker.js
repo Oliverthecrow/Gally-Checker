@@ -62,4 +62,4 @@ async function ExoticChecker(name) {
 function StrandDetection() {
 
 }
-ExoticChecker('Oliver the crow#3439');
+ExoticChecker('Oliver the crow#3439').then(console.log);
