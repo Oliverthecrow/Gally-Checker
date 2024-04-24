@@ -1,5 +1,6 @@
 let apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
 let OwnedExotics = [false, false, false, false, false, false, false]
+let Images = [];
 
 async function getUserFromName(name) {
     let headers = new Headers();
@@ -55,7 +56,7 @@ async function ExoticChecker(name) {
                     console.log('${name} has ' + Exotics[i]);
                     OwnedExotics.splice(i, 1, true)
                 }
-                else { console.log('${name} does not have ' + Exotics[i]); }
+                else { console.log(name + ' does not have ' + Exotics[i]); }
             };
         })
     );
@@ -65,3 +66,26 @@ ExoticChecker('Oliver the crow#3439').then(console.log);
 ExoticChecker('Unstable Light 0:01#9056').then(console.log);
 ExoticChecker('very real username').then(console.log);
 ExoticChecker('mixed wrestling#8577').then(console.log);
+
+function preload() {
+    Images = [
+        Gjally = loadImage('Gjally.jpg'),
+        Izi = loadImage("Izanagis Burden.jpg"),
+        Lumina = loadImage('Lumina.jpg'),
+        Tractor = loadImage('Tractor Canon.jpg'),
+        Witherhoard = loadImage('Witherhoard.jpg'),
+        Verity = loadImage("Veritys Brow.jpg"),
+        Cenotaph = loadImage('Cenotaph.jpg')
+    ];
+}
+function setup() {
+    let WIW = window.innerWidth;
+    let WIH = window.innerHeight;
+    let canvas = createCanvas(WIW, WIH)
+    canvas.parent('GallyCheckerCanvas')
+}
+function draw() {
+    for (let i = 0; i < Image.length; i++) {
+        Image(Images[i], WIW * 0.15 + (WIW * 0.15 * i), WIH * 0.75)
+    }
+}
