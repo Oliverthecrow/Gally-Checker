@@ -1,5 +1,7 @@
 let apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
 let username = '';
+let membershipId = '';
+let membershipType = '';
 let SearchUrl = 'https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${username}/';
 
 let myHeaders = new Headers();
@@ -15,8 +17,8 @@ function findPlayer(Url) {
     fetch(Url, requestOptions)
         .then(response => response.json().then(result => {
             let player = result.Response[0];
-            let membershipType = player.membershipType;
-            let membershipId = player.membershipId;
+            membershipType = player.membershipType;
+            membershipId = player.membershipId;
             console.log('Membership Type:', membershipType);
             console.log('MembershipID', membershipId);
         }))
@@ -29,15 +31,15 @@ function ExoticChecker(type, name) {
             /* GallyId '4027219968' IziId = '3211806999' LuminaId = '3512014804' WithoardID = '2522817335' TractorId = '3580904581'
             Verity's Brow = '2897117448' Cenotaph = '2374129871'
             */
-            let Exotics = ['4027219968', '3211806999', '3512014804', '2522817335', '3580904581', '2897117448', '2374129871']
+            let Exotics = ['4027219968', '3211806999', '3512014804', '2522817335', '3580904581', '2897117448', '2374129871'];
 
             for (let i = 0; i <= Exotics.length; i++) {
                 if (collectibles[Exotics[i]]) {
-                    console.log('Player has ' + Exotics[i])
+                    console.log('Player has ' + Exotics[i]);
                 }
-                else { console.log('Player does not have' + Exotics[i]) }
-            }
-        }))
+                else { console.log('Player does not have' + Exotics[i]); }
+            };
+        }));
 }
 findPlayer('https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/Oliver%20the%20crow%233439/');
 ExoticChecker(membershipType, membershipId);
