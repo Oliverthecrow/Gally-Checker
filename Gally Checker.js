@@ -47,11 +47,11 @@ async function ExoticChecker(name) {
     ).then((response) =>
         response.json().then((result) => {
             // every item that the player owns
-            /* GallyId '4027219968' IziId = '3211806999' LuminaId = '3512014804' WithoardID = '2522817335' TractorId = '3580904581'
-            Verity's Brow = '2897117448' Cenotaph = '2374129871'
+            /* GallyId '4027219968' IziId = '24541428' LuminaId = '2924632392' WithoardID = '1250332035' TractorId = '2094776121'
+            Verity's Brow = '846189250' Cenotaph = '2940602493'
             */
             let collectibles = result.Response.profileCollectibles.data.collectibles;
-            let Exotics = ['4027219968', '3211806999', '3512014804', '2522817335', '3580904581', '2897117448', '2374129871'];
+            let Exotics = ['4027219968', '24541428', '2924632392', '1250332035', '2094776121', '846189250', '2940602493'];
 
             for (let i = 0; i < Exotics.length; i++) {
                 if (collectibles[Exotics[i]].state === 0) {
