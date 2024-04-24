@@ -39,7 +39,7 @@ button {
     position: absolute;
     top: 30%;
     left: 42%;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(2px);
     background-color: transparent;
     text-align: center;
     font-size: 30px;
@@ -52,12 +52,11 @@ button {
     border-radius: 5px;
     box-shadow: 5px 5px 20px white, -5px -5px 20px white;
 }
-
-.button:hover {
-    backdrop-filter: blur(30px);
+button:hover {
+    backdrop-filter: blur(1000px);
 }
 
-.button:active {
+button:active {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
 }
