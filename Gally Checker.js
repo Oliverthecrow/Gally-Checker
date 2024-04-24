@@ -30,6 +30,7 @@ async function getUserFromName(name) {
         redirect: 'follow',
     };
     user = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1`, opts).then((response) => response.json().then());
+    ExoticChecker(name)
     return user.Response;
 }
 
@@ -62,4 +63,4 @@ async function ExoticChecker(name) {
 function StrandDetection() {
 
 }
-ExoticChecker('Oliver the crow#3439').then(console.log);
+getUserFromName('Oliver the crow#3439');
