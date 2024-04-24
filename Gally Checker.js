@@ -5,7 +5,7 @@ let membershipId = '';
 let SearchUrl = "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${username}/";
 
 let myHeaders = new Headers();
-myHeaders.append("X-API-KEY", 'd95853023d6143c89b5dd62c4c0ebdf9');
+myHeaders.append("X-API-KEY", apiKey);
 myHeaders.append("Authorization", "Bearer 46542");
 
 let requestOptions = {
@@ -23,7 +23,7 @@ fetch("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/Oliver%20
         console.log("Membership Type:", membershipType);
         console.log("MembershipID", membershipId);
     })
-fetch('https://bungie.net/Platform/Destiny2/' + membershipType + '/Profile/' + membershipId + '/?components=800', requestOptions)
+    fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`, requestOptions)
     .then(response => response.json())
     .then(result => {
         let itemComponent = result.Response.collectibles.data;
@@ -37,6 +37,7 @@ fetch('https://bungie.net/Platform/Destiny2/' + membershipType + '/Profile/' + m
             console.log('Player does not have Gjallarhorn');
         }
     });
+    //just for testing rn
 fetch('https://bungie.net/Platform/Destiny2/1/Profile/4611686018439914143/?components=800', requestOptions)
     .then(response => response.json())
     .then(result => {
