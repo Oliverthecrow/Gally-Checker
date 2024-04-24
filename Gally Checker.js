@@ -3,6 +3,7 @@ let OwnedExotics = [false, false, false, false, false, false, false]
 let Images = [];
 let WIW = window.innerWidth;
 let WIH = window.innerHeight;
+let broke = false
 
 async function getUserFromName(name) {
     let headers = new Headers();
@@ -57,9 +58,12 @@ async function ExoticChecker(name) {
             let Exotics = ['4027219968', '24541428', '2924632392', '1250332035', '2094776121', '846189250', '2940602493'];
 
             for (let i = 0; i < Exotics.length; i++) {
-                if (collectibles[Exotics[i]].state === 0 || charCollectibles[Exotics[i]].state === 16) {
+                if (collectibles[Exotics[i]].state === 0 || charCollectibles[Exotics[i]].state % 2 === 0 && charCollectibles[Exotics[i]].state != 0) {
                     console.log(name + ' has ' + Exotics[i]);
                     OwnedExotics.splice(i, 1, true)
+                    if(collectibles[Exotics[i]].state === 8 || collectibles[Exotics[i]].state === 9) {
+                        broke = true;
+                    }
                 }
                 else { console.log(name + ' does not have ' + Exotics[i]); }
             };
@@ -101,6 +105,8 @@ function draw() {
             image(X,WIW * 0.10 + WIW * 0.13 * i, WIH * 0.4,96,96);
         }
     }
+    textAlign(CENTER);
+    if(broke) {text("THIS USER IS SO BROKE HOLY",WIW*0.8,WIH*0.8);}
 }
 function setname() {
     let name = document.getElementById('userNameInput').value;
