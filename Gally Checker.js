@@ -26,29 +26,27 @@ fetch("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/Oliver%20
 fetch('https://bungie.net/Platform/Destiny2/' + membershipType + '/Profile/' + membershipId + '/?components=800', requestOptions)
     .then(response => response.json())
     .then(result => {
-        console.log(result);
         let itemComponent = result.Response.collectibles.data;
         let GallyId = '1363886209';
 
         // Check if the player has the Gjallarhorn.
         if (itemComponent[GallyId]) {
             console.log('Player has Gjallarhorn');
-        } 
+        }
         else {
             console.log('Player does not have Gjallarhorn');
         }
     });
-    fetch('https://bungie.net/Platform/Destiny2/1/Profile/4611686018439914143/?components=800', requestOptions)
+fetch('https://bungie.net/Platform/Destiny2/1/Profile/4611686018439914143/?components=800', requestOptions)
     .then(response => response.json())
     .then(result => {
-        console.log(result);
         let itemComponent = result.Response.collectibles.data;
         let GallyId = '1363886209';
 
         // Check if the player has the Gjallarhorn.
         if (itemComponent[GallyId]) {
             console.log('Player has Gjallarhorn');
-        } 
+        }
         else {
             console.log('Player does not have Gjallarhorn');
         }
