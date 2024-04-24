@@ -53,10 +53,11 @@ async function ExoticChecker(name) {
             Verity's Brow = '846189250' Cenotaph = '2940602493'
             */
             let collectibles = result.Response.profileCollectibles.data.collectibles;
+            let charCollectibles = result.response.characterCollectibles.data.collectibles;
             let Exotics = ['4027219968', '24541428', '2924632392', '1250332035', '2094776121', '846189250', '2940602493'];
 
             for (let i = 0; i < Exotics.length; i++) {
-                if (collectibles[Exotics[i]].state === 0 || collectibles[Exotics[i]].state === 16) {
+                if (collectibles[Exotics[i]].state === 0 || charCollectibles[Exotics[i]].state === 16) {
                     console.log(name + ' has ' + Exotics[i]);
                     OwnedExotics.splice(i, 1, true)
                 }
