@@ -1,4 +1,5 @@
 let apiKey = 'd95853023d6143c89b5dd62c4c0ebdf9';
+let OwnedExotics = [false, false, false, false, false, false, false]
 
 async function getUserFromName(name) {
     let headers = new Headers();
@@ -52,6 +53,7 @@ async function ExoticChecker(name) {
             for (let i = 0; i < Exotics.length; i++) {
                 if (collectibles[Exotics[i]].state === 0) {
                     console.log('${name} has ' + Exotics[i]);
+                    OwnedExotics.splice(i, 1, true)
                 }
                 else { console.log('${name} does not have ' + Exotics[i]); }
             };
