@@ -24,7 +24,7 @@ function findPlayer(Url) {
         }))
 }
 function ExoticChecker(type, name) {
-    fetch('https://www.bungie.net/Platform/Destiny2/' + type + '/Profile/' + name + '/?components=800', requestOptions)
+    fetch('https://www.bungie.net/Platform/Destiny2/' + type.toString() + '/Profile/' + name.toString() + '/?components=800', requestOptions)
         .then((response) => response.json().then((result) => {
             // every item that the player owns
             let collectibles = result.Response.profileCollectibles.data.collectibles;
@@ -33,7 +33,7 @@ function ExoticChecker(type, name) {
             */
             let Exotics = ['4027219968', '3211806999', '3512014804', '2522817335', '3580904581', '2897117448', '2374129871'];
 
-            for (let i = 0; i <= Exotics.length; i++) {
+            for (let i = 0; i < Exotics.length; i++) {
                 if (collectibles[Exotics[i]]) {
                     console.log('Player has ' + Exotics[i]);
                 }
