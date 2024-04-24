@@ -57,5 +57,5 @@ function StrandDetector() {
             return false;
         }))
 }
-if (StrandDetector) { console.log('Player has strand') }
+if (StrandDetector()) { console.log('Player has strand') }
 else { console.log('Player does not have strand') }
