@@ -58,6 +58,7 @@ async function ExoticChecker(name) {
             let Exotics = ['4027219968', '24541428', '2924632392', '1250332035', '2094776121', '846189250', '2940602493'];
 
             for (let i = 0; i < Exotics.length; i++) {
+                console.log(charCollectibles[Exotics[i]].state);
                 if (collectibles[Exotics[i]].state === 0 || charCollectibles[Exotics[i]].state % 2 === 0 && charCollectibles[Exotics[i]].state != 0) {
                     console.log(name + ' has ' + Exotics[i]);
                     OwnedExotics.splice(i, 1, true)
@@ -106,11 +107,14 @@ function draw() {
         }
     }
     textAlign(CENTER);
+    textSize(18);
     if(broke) {text("THIS USER IS SO BROKE HOLY",WIW*0.8,WIH*0.8);}
+    if(!user[0]) {text("This user does not seem to exist",WIW*0.5,WIH*0.5);}
 }
 function setname() {
     let name = document.getElementById('userNameInput').value;
     console.log("Variable name is:", name);
     OwnedExotics = [false, false, false, false, false, false, false];
+    broke = false;
     ExoticChecker(name).then(console.log);
 }
