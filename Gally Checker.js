@@ -105,6 +105,7 @@ function draw() {
     if(broke) {text("THIS USER IS SO BROKE HOLY",WIW*0.8,WIH*0.8);}
     if(doesnotexist) {text("This user does not seem to exist",WIW*0.5,WIH*0.5);}
 }
+//runs all the code when clicking button and resets variables from previous searches
 function setname() {
     let name = document.getElementById('userNameInput').value;
     console.log("Variable name is:", name);
