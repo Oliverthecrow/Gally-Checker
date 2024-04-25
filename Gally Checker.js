@@ -134,8 +134,8 @@ function gloog(name) {
             }
         }
     }).then(() => {
-            if (broke) { document.getElementById('Broke').style.visibility = "visible" } //if a user is unable to purchase this item from collections, meaning they have almost nothing, it says that the they are broke
-            else { document.getElementById('Broke').style.visibility = "hidden" }
+        if (broke) { document.getElementById('Broke').style.visibility = "visible" } //if a user is unable to purchase this item from collections, meaning they have almost nothing, it says that the they are broke
+        else { document.getElementById('Broke').style.visibility = "hidden" }
         /* for (let i = 0; i < ownedExotics.length; i++) {
                 console.log(`${Object.keys(THINGS_TO_CHECK)[i]}: ${ownedExotics[i]}`);
             } in case needed*/
@@ -171,6 +171,9 @@ function draw() { //draws all images
     }
     textAlign(CENTER);
     textSize(16);
+
+    WIW = window.innerWidth;
+    WIH = window.innerHeight;
 }
 
 function setname() {
@@ -183,5 +186,5 @@ function setname() {
     gloog(name); //checks everything :3
 }
 function windowResized() {
-    resizeCanvas(innerWidth, innerHeight);
+    resizeCanvas(WIW, WIH);
 }
