@@ -49,17 +49,13 @@ async function checkForItemOwnership(name) {
     };
     let user = await getUserFromName(name);
     if (!user[0]) {
-        console.log(RED + `user "${name}" does not exist.` + WHITE);
+        userDoesNotExist = true;
         return false;
     }
     let firstMembership = user[0];
     const membershipType = firstMembership.membershipType;
     const membershipId = firstMembership.membershipId;
-    return fetch(
-        `https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`,
-        requestOptions
-    ).then((response) =>
-        response.json().then((result) => {
+    return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`,requestOptions).then((response) =>response.json().then((result) => {
             let itemStates = [];
             for (const [itemName, itemID] of Object.entries(THINGS_TO_CHECK)) {
                 let profileCollectibles =
@@ -107,47 +103,44 @@ async function getUserFromName(name) {
         redirect: "follow",
     };
 
-    let user = await fetch(
-        //-1 is the "i dont care about membership type" option.
-        `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1`,
-        opts
-    ).then((response) => response.json().then());
+    let user = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1`,opts).then((response) => response.json().then());
     return user.Response;
 }
 function handleCollectibleState(state) {
     broke = state.cannotAffordMaterialRequirements;
     return !state.notAcquired;
 }
-checkForItemOwnership(names[4]).then((items) => {
-    for (let i = 0; i < items.length; i++) {
-        let current = items[i].state;
-        // if armor piece, and therefore character data
-        if (Object.keys(current.statesPerCharacter).length !== 0) {
-            let found = false;
-            for (let character of Object.values(current.statesPerCharacter)) {
-                if (handleCollectibleState(character)) {
-                    found = true;
-                    break;
+function gloog(name) {
+    checkForItemOwnership(name).then((items) => {
+        for (let i = 0; i < items.length; i++) {
+            let current = items[i].state;
+            // if armor piece, and therefore character data
+            if (Object.keys(current.statesPerCharacter).length !== 0) {
+                let found = false;
+                for (let character of Object.values(current.statesPerCharacter)) {
+                    if (handleCollectibleState(character)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
+                    ownedExotics[i] = true;
                 }
             }
-            if (found) {
-                ownedExotics[i] = true;
+            // if profile data
+            else {
+                ownedExotics[i] = handleCollectibleState(current.profileCollectibles);
             }
         }
-        // if profile data
-        else {
-            ownedExotics[i] = handleCollectibleState(current.profileCollectibles);
+    }).then(() => {
+        if (broke) {
+            text("THIS GUY NEEDS TO GET HIS MONEY UP!!!!", WIW * 0.8, WIH * 0.8);
         }
-    }
-}).then(() => {
-    if (broke) {
-        text("THIS GUY NEEDS TO GET HIS MONEY UP!!!!", WIW * 0.8, WIH * 0.8);
-    }
-    /* for (let i = 0; i < ownedExotics.length; i++) {
-            console.log(`${Object.keys(THINGS_TO_CHECK)[i]}: ${ownedExotics[i]}`);
-        } */
-});
-
+        /* for (let i = 0; i < ownedExotics.length; i++) {
+                console.log(`${Object.keys(THINGS_TO_CHECK)[i]}: ${ownedExotics[i]}`);
+            } in case needed*/
+    });
+}
 function preload() {
     Images = [
         Gjally = loadImage('Gjally.jpg'),
@@ -166,10 +159,10 @@ function setup() {
     canvas.parent('GallyCheckerCanvas');
     textAlign(CENTER);
 }
-function draw() {
+function draw() { //draws all images
     for (let i = 0; i < Images.length; i++) {
         image(Images[i], WIW * 0.10 + WIW * 0.13 * i, WIH * 0.4);
-        if (OwnedExotics[i]) {
+        if (ownedExotics[i]) {
             image(Checkmark, WIW * 0.10 + WIW * 0.13 * i, WIH * 0.4, 96, 96);
         }
         else {
@@ -179,14 +172,14 @@ function draw() {
     textAlign(CENTER);
     textSize(18);
     if (broke) { text("THIS USER IS SO BROKE HOLY", WIW * 0.8, WIH * 0.8); }
-    if (doesnotexist) { text("This user does not seem to exist", WIW * 0.5, WIH * 0.5); }
+    if (userDoesNotExist) { text("This user does not seem to exist", WIW * 0.5, WIH * 0.5); }
 }
 
 function setname() {
     let name = document.getElementById('userNameInput').value;
     console.log("Variable name is:", name);
-    OwnedExotics = [false, false, false, false, false, false, false];
+    ownedExotics = [false, false, false, false, false, false, false];
     broke = false;
-    doesnotexist = false;
-    ExoticChecker(name).then(console.log);
+    userDoesNotExist = false;
+    gloog(name); //checks everything :3
 }
