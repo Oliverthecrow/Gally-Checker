@@ -124,10 +124,12 @@ function gloog(name) {
                 }
                 if (found) {
                     ownedExotics[i] = true;
+                    console.log("${name} has " + ownedExotics[i]);
                 }
             }
             // if profile data
             else {
+                console.log("${name} has " + ownedExotics[i]);
                 ownedExotics[i] = handleCollectibleState(current.profileCollectibles);
             }
         }
@@ -175,8 +177,8 @@ function setname() {
     let name = document.getElementById('userNameInput').value;
     console.log("Variable name is:", name);
     ownedExotics = [false, false, false, false, false, false, false];
-    document.getElementById('Broke').style.visibility = "hidden"
-    broke = false
-    document.getElementById('Exist').style.visibility = "hidden"
+    document.getElementById('Broke').style.visibility = "hidden";
+    broke = false;
+    document.getElementById('Exist').style.visibility = "hidden";
     gloog(name); //checks everything :3
 }
