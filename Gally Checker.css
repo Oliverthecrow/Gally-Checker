@@ -61,6 +61,7 @@ button:active {
     transform: translateY(4px);
 }
 #Broke {
+    visibility: hidden;
     font-size: 40px;
     color: black;
     text-align: center;
@@ -68,6 +69,7 @@ button:active {
     margin-top: 20vh;
 }
 #Exist {
+    visibility: hidden;
     font-size: 20px;
     color: black;
     text-align: center;
