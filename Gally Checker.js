@@ -1,5 +1,5 @@
-const apiKey = "d95853023d6143c89b5dd62c4c0ebdf9";
-const THINGS_TO_CHECK = {
+let apiKey = "d95853023d6143c89b5dd62c4c0ebdf9";
+let THINGS_TO_CHECK = {
     "Gjallarhorn": "4027219968",
     "Izanagi's Burden": "24541428",
     "Lumina": "2924632392",
@@ -41,7 +41,7 @@ async function checkForItemOwnership(name) {
     let myHeaders = new Headers();
     myHeaders.append("X-API-KEY", apiKey);
     myHeaders.append("Authorization", "46542");
-    const requestOptions = {
+    let requestOptions = {
         method: "GET",
         headers: myHeaders,
         redirect: "follow",
@@ -52,11 +52,13 @@ async function checkForItemOwnership(name) {
         return false;
     }
     let firstMembership = user[0];
-    const membershipType = firstMembership.membershipType;
-    const membershipId = firstMembership.membershipId;
+    let membershipType = firstMembership.membershipType;
+    let membershipId = firstMembership.membershipId;
+    console.log("MembershipID = " + membershipId);
+    console.log("MembershipType = " + membershipType);
     return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`, requestOptions).then((response) => response.json().then((result) => {
         let itemStates = [];
-        for (const [itemName, itemID] of Object.entries(THINGS_TO_CHECK)) {
+        for (let [itemName, itemID] of Object.entries(THINGS_TO_CHECK)) {
             let profileCollectibles =
                 result.Response.profileCollectibles.data.collectibles;
             let characters = result.Response.characterCollectibles.data;
@@ -92,7 +94,7 @@ async function getUserFromName(name) {
     let headers = new Headers();
     headers.append("X-API-KEY", apiKey);
     headers.append("Authorization", "46542");
-    const opts = {
+    let opts = {
         method: "POST",
         body: JSON.stringify({
             displayName: name.split("#")[0],
@@ -124,12 +126,10 @@ function gloog(name) {
                 }
                 if (found) {
                     ownedExotics[i] = true;
-                    console.log("${name} has " + ownedExotics[i]);
                 }
             }
             // if profile data
             else {
-                console.log("${name} has " + ownedExotics[i]);
                 ownedExotics[i] = handleCollectibleState(current.profileCollectibles);
             }
         }
