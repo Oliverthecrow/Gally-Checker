@@ -170,9 +170,9 @@ function draw() { //draws all images
         }
     }
     textAlign(CENTER);
-    textSize(18);
-    if (broke) { text("THIS USER IS SO BROKE HOLY", WIW * 0.8, WIH * 0.8); }
-    if (userDoesNotExist) { text("This user does not seem to exist", WIW * 0.5, WIH * 0.5); }
+    textSize(16);
+    if (broke) { text("THIS USER IS SO BROKE HOLY", WIW * 0.5, WIH * 0.4); }
+    if (userDoesNotExist) { text("This user does not seem to exist", WIW * 0.5, WIH * 0.3); }
 }
 
 function setname() {
