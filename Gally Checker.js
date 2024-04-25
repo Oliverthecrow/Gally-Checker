@@ -20,7 +20,6 @@ const THINGS_TO_CHECK = {
 
 let ownedExotics = [false, false, false, false, false, false, false];
 let broke = false;
-let userDoesNotExist = false;
 let Images = [];
 let WIW = window.innerWidth;
 let WIH = window.innerHeight;
@@ -49,43 +48,43 @@ async function checkForItemOwnership(name) {
     };
     let user = await getUserFromName(name);
     if (!user[0]) {
-        userDoesNotExist = true;
+        document.getElementById('Exist').style.visibility = "visible"
         return false;
     }
     let firstMembership = user[0];
     const membershipType = firstMembership.membershipType;
     const membershipId = firstMembership.membershipId;
-    return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`,requestOptions).then((response) =>response.json().then((result) => {
-            let itemStates = [];
-            for (const [itemName, itemID] of Object.entries(THINGS_TO_CHECK)) {
-                let profileCollectibles =
-                    result.Response.profileCollectibles.data.collectibles;
-                let characters = result.Response.characterCollectibles.data;
+    return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=800`, requestOptions).then((response) => response.json().then((result) => {
+        let itemStates = [];
+        for (const [itemName, itemID] of Object.entries(THINGS_TO_CHECK)) {
+            let profileCollectibles =
+                result.Response.profileCollectibles.data.collectibles;
+            let characters = result.Response.characterCollectibles.data;
 
-                let allStates = {
-                    statesPerCharacter: [],
-                    profileCollectibles: {},
-                };
+            let allStates = {
+                statesPerCharacter: [],
+                profileCollectibles: {},
+            };
 
-                // check the characters for item state, if it exists
-                for (let character in characters) {
-                    let item = characters[character].collectibles[itemID];
-                    if (item) {
-                        let state = parseDestinyCollectibleState(item.state);
-                        allStates.statesPerCharacter[character] = state;
-                    }
+            // check the characters for item state, if it exists
+            for (let character in characters) {
+                let item = characters[character].collectibles[itemID];
+                if (item) {
+                    let state = parseDestinyCollectibleState(item.state);
+                    allStates.statesPerCharacter[character] = state;
                 }
-
-                // grab profile wide state for item, if it exists.
-                if (profileCollectibles[itemID]) {
-                    allStates.profileCollectibles = parseDestinyCollectibleState(
-                        profileCollectibles[itemID].state
-                    );
-                }
-                itemStates.push({ name: itemName, state: allStates });
             }
-            return itemStates;
-        })
+
+            // grab profile wide state for item, if it exists.
+            if (profileCollectibles[itemID]) {
+                allStates.profileCollectibles = parseDestinyCollectibleState(
+                    profileCollectibles[itemID].state
+                );
+            }
+            itemStates.push({ name: itemName, state: allStates });
+        }
+        return itemStates;
+    })
     );
 }
 
@@ -103,7 +102,7 @@ async function getUserFromName(name) {
         redirect: "follow",
     };
 
-    let user = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1`,opts).then((response) => response.json().then());
+    let user = await fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1`, opts).then((response) => response.json().then());
     return user.Response;
 }
 function handleCollectibleState(state) {
@@ -133,9 +132,8 @@ function gloog(name) {
             }
         }
     }).then(() => {
-        if (broke) {
-            text("THIS GUY NEEDS TO GET HIS MONEY UP!!!!", WIW * 0.8, WIH * 0.8);
-        }
+            if (broke) { document.getElementById('Broke').style.visibility = "visible" }
+            else { document.getElementById('Broke').style.visibility = "hidden" }
         /* for (let i = 0; i < ownedExotics.length; i++) {
                 console.log(`${Object.keys(THINGS_TO_CHECK)[i]}: ${ownedExotics[i]}`);
             } in case needed*/
@@ -171,15 +169,14 @@ function draw() { //draws all images
     }
     textAlign(CENTER);
     textSize(16);
-    if (broke) { text("THIS USER IS SO BROKE HOLY", WIW * 0.5, WIH * 0.4); }
-    if (userDoesNotExist) { text("This user does not seem to exist", WIW * 0.5, WIH * 0.3); }
 }
 
 function setname() {
     let name = document.getElementById('userNameInput').value;
     console.log("Variable name is:", name);
     ownedExotics = [false, false, false, false, false, false, false];
-    broke = false;
-    userDoesNotExist = false;
+    document.getElementById('Broke').style.visibility = "hidden"
+    broke = false
+    document.getElementById('Exist').style.visibility = "hidden"
     gloog(name); //checks everything :3
 }

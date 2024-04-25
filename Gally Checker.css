@@ -37,8 +37,8 @@ input {
 
 button {
     position: absolute;
-    top: 30%;
-    left: 42%;
+    top: 36vh;
+    left: 42vw;
     backdrop-filter: blur(2px);
     background-color: transparent;
     text-align: center;
@@ -59,4 +59,17 @@ button:hover {
 button:active {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+}
+#Broke {
+    font-size: 40px;
+    color: black;
+    text-align: center;
+    left: 50vw;
+    margin-top: 20vh;
+}
+#Exist {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-top: 10px;
 }
