@@ -182,3 +182,6 @@ function setname() {
     document.getElementById('Exist').style.visibility = "hidden";
     gloog(name); //checks everything :3
 }
+function windowResized() {
+    resizeCanvas(innerWidth, innerHeight);
+}
