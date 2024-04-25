@@ -134,7 +134,7 @@ function gloog(name) {
             }
         }
     }).then(() => {
-            if (broke) { document.getElementById('Broke').style.visibility = "visible" }
+            if (broke) { document.getElementById('Broke').style.visibility = "visible" } //if a user is unable to purchase this item from collections, meaning they have almost nothing, it says that the they are broke
             else { document.getElementById('Broke').style.visibility = "hidden" }
         /* for (let i = 0; i < ownedExotics.length; i++) {
                 console.log(`${Object.keys(THINGS_TO_CHECK)[i]}: ${ownedExotics[i]}`);
