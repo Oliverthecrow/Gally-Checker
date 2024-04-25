@@ -161,12 +161,12 @@ function setup() {
 }
 function draw() { //draws all images
     for (let i = 0; i < Images.length; i++) {
-        image(Images[i], WIW * 0.10 + WIW * 0.13 * i, WIH * 0.15);
+        image(Images[i], WIW * 0.10 + (WIW * 0.134 * i), WIH * 0.4);
         if (ownedExotics[i]) {
-            image(Checkmark, WIW * 0.10 + WIW * 0.13 * i, WIH * 0.15, 96, 96);
+            image(Checkmark, WIW * 0.10 + (WIW * 0.134 * i), WIH * 0.4, 96, 96);
         }
         else {
-            image(X, WIW * 0.10 + WIW * 0.13 * i, WIH * 0.15, 96, 96);
+            image(X, WIW * 0.10 + (WIW * 0.134 * i), WIH * 0.4, 96, 96);
         }
     }
     textAlign(CENTER);
