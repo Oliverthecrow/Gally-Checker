@@ -5,6 +5,7 @@ let THINGS_TO_CHECK = {
     "Lumina": "2924632392",
     "Tractor Cannon": "2094776121",
     "Witherhoard": "1250332035",
+    "Divinity": "1988948484",
     "Verity's Brow": "846189250",
     "Cenotaph Mask": "2940602493",
 };
@@ -18,7 +19,7 @@ let THINGS_TO_CHECK = {
     "Ourple Gourd#5833",
 ];*/
 
-let ownedExotics = [false, false, false, false, false, false, false];
+let ownedExotics = [false, false, false, false, false, false, false, false];
 let broke = false;
 let Images = [];
 let WIW = window.innerWidth;
@@ -148,6 +149,7 @@ function preload() {
         Lumina = loadImage('Lumina.jpg'),
         Tractor = loadImage('Tractor Canon.jpg'),
         Witherhoard = loadImage('Witherhoard.jpg'),
+        Divinity = loadImage('Divinity.jpg'),
         Verity = loadImage("Veritys Brow.jpg"),
         Cenotaph = loadImage('Cenotaph.jpg')
     ];
@@ -161,12 +163,12 @@ function setup() {
 }
 function draw() { //draws all images
     for (let i = 0; i < Images.length; i++) {
-        image(Images[i], WIW * 0.10 + (WIW * 0.134 * i), WIH * 0.2);
+        image(Images[i], WIW * 0.075 + (WIW * 0.115 * i), WIH * 0.2);
         if (ownedExotics[i]) {
-            image(Checkmark, WIW * 0.10 + (WIW * 0.134 * i), WIH * 0.2, 96, 96);
+            image(Checkmark, WIW * 0.075 + (WIW * 0.115 * i), WIH * 0.2, 96, 96);
         }
         else {
-            image(X, WIW * 0.10 + (WIW * 0.134 * i), WIH * 0.2, 96, 96);
+            image(X, WIW * 0.075 + (WIW * 0.115 * i), WIH * 0.2, 96, 96);
         }
     }
     textAlign(CENTER);
@@ -179,7 +181,7 @@ function draw() { //draws all images
 function setname() {
     let name = document.getElementById('userNameInput').value;
     console.log("Variable name is:", name);
-    ownedExotics = [false, false, false, false, false, false, false];
+    ownedExotics = [false, false, false, false, false, false, false, false];
     document.getElementById('Broke').style.visibility = "hidden";
     broke = false;
     document.getElementById('Exist').style.visibility = "hidden";
